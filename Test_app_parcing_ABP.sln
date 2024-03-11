@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_app_parcing_ABP", "Test_app_parcing_ABP\Test_app_parcing_ABP.csproj", "{82C75488-A969-442E-A0D5-9BED23E92E8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82C75488-A969-442E-A0D5-9BED23E92E8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82C75488-A969-442E-A0D5-9BED23E92E8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82C75488-A969-442E-A0D5-9BED23E92E8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82C75488-A969-442E-A0D5-9BED23E92E8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E8CE9A2-A8CE-4B17-90E9-98AD6C815AB3}
+	EndGlobalSection
+EndGlobal

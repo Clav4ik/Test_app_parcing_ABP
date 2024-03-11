@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fb686eb7be264361af96482a186cd469" Name="Diagram1">
+        <EntityTypeShape EntityType="Database_test_scrapy_ABPModel.Group" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_test_scrapy_ABPModel.Model" Width="1.5" PointX="4.875" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_test_scrapy_ABPModel.Parts" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_test_scrapy_ABPModel.SubGroup" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_test_scrapy_ABPModel.BasePool" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Database_test_scrapy_ABPModel.FK__BasePool__group__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_test_scrapy_ABPModel.FK__Group__id_subgro__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_test_scrapy_ABPModel.FK__BasePool__code__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_test_scrapy_ABPModel.FK__SubGroup__id_par__2739D489" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

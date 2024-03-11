@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database_test_scrapy_ABPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\ПОЛЬЗОВАТЕЛЬ\SOURCE\REPOS\TEST_APP_PARCING_ABP\TEST_APP_PARCING_ABP\DATABASE_TEST_SCRAPY_ABP.MDF.dbo.BasePool' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BasePool">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="complectation" Type="ntext" />
+          <Property Name="baseJSON" Type="text" />
+          <Property Name="code" Type="int" />
+          <Property Name="group" Type="int" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="title" Type="text" />
+          <Property Name="id_subgroup" Type="int" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="IDModel" />
+          </Key>
+          <Property Name="IDModel" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="startDate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="endDate" Type="varchar" MaxLength="10" />
+          <Property Name="complectation" Type="varchar" MaxLength="50" />
+          <Property Name="code" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="50" />
+          <Property Name="count" Type="smallint" />
+          <Property Name="info" Type="varchar" MaxLength="50" />
+          <Property Name="tree_code" Type="nchar" MaxLength="10" />
+          <Property Name="tree" Type="varchar" MaxLength="50" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <EntityType Name="SubGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="id_parts" Type="int" />
+        </EntityType>
+        <Association Name="FK__BasePool__code__02FC7413">
+          <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+          <End Role="BasePool" Type="Self.BasePool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="IDModel" />
+            </Principal>
+            <Dependent Role="BasePool">
+              <PropertyRef Name="code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BasePool__group__1BC821DD">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="BasePool" Type="Self.BasePool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BasePool">
+              <PropertyRef Name="group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Group__id_subgro__19DFD96B">
+          <End Role="SubGroup" Type="Self.SubGroup" Multiplicity="0..1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="id_subgroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubGroup__id_par__2739D489">
+          <End Role="Parts" Type="Self.Parts" Multiplicity="0..1" />
+          <End Role="SubGroup" Type="Self.SubGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubGroup">
+              <PropertyRef Name="id_parts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database_test_scrapy_ABPModelStoreContainer">
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parts" EntityType="Self.Parts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubGroup" EntityType="Self.SubGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BasePool" EntityType="Self.BasePool" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BasePool].[Id] AS [Id], 
+    [BasePool].[complectation] AS [complectation], 
+    [BasePool].[baseJSON] AS [baseJSON], 
+    [BasePool].[code] AS [code], 
+    [BasePool].[group] AS [group]
+    FROM [dbo].[BasePool] AS [BasePool]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__BasePool__code__02FC7413" Association="Self.FK__BasePool__code__02FC7413">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="BasePool" EntitySet="BasePool" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BasePool__group__1BC821DD" Association="Self.FK__BasePool__group__1BC821DD">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="BasePool" EntitySet="BasePool" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Group__id_subgro__19DFD96B" Association="Self.FK__Group__id_subgro__19DFD96B">
+            <End Role="SubGroup" EntitySet="SubGroup" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubGroup__id_par__2739D489" Association="Self.FK__SubGroup__id_par__2739D489">
+            <End Role="Parts" EntitySet="Parts" />
+            <End Role="SubGroup" EntitySet="SubGroup" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database_test_scrapy_ABPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_subgroup" Type="Int32" />
+          <NavigationProperty Name="BasePool" Relationship="Self.FK__BasePool__group__1BC821DD" FromRole="Group" ToRole="BasePool" />
+          <NavigationProperty Name="SubGroup" Relationship="Self.FK__Group__id_subgro__19DFD96B" FromRole="Group" ToRole="SubGroup" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="IDModel" />
+          </Key>
+          <Property Name="IDModel" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="startDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="endDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="complectation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BasePool" Relationship="Self.FK__BasePool__code__02FC7413" FromRole="Model" ToRole="BasePool" />
+        </EntityType>
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="count" Type="Int16" />
+          <Property Name="info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tree_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="tree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="SubGroup" Relationship="Self.FK__SubGroup__id_par__2739D489" FromRole="Parts" ToRole="SubGroup" />
+        </EntityType>
+        <EntityType Name="SubGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_parts" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="Self.FK__Group__id_subgro__19DFD96B" FromRole="SubGroup" ToRole="Group" />
+          <NavigationProperty Name="Parts" Relationship="Self.FK__SubGroup__id_par__2739D489" FromRole="SubGroup" ToRole="Parts" />
+        </EntityType>
+        <EntityType Name="BasePool">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="complectation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="baseJSON" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="code" Type="Int32" />
+          <Property Name="group" Type="Int32" />
+          <NavigationProperty Name="Group1" Relationship="Self.FK__BasePool__group__1BC821DD" FromRole="BasePool" ToRole="Group" />
+          <NavigationProperty Name="Model" Relationship="Self.FK__BasePool__code__02FC7413" FromRole="BasePool" ToRole="Model" />
+        </EntityType>
+        <Association Name="FK__BasePool__group__1BC821DD">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="BasePool" Type="Self.BasePool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BasePool">
+              <PropertyRef Name="group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Group__id_subgro__19DFD96B">
+          <End Role="SubGroup" Type="Self.SubGroup" Multiplicity="0..1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="id_subgroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BasePool__code__02FC7413">
+          <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+          <End Role="BasePool" Type="Self.BasePool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="IDModel" />
+            </Principal>
+            <Dependent Role="BasePool">
+              <PropertyRef Name="code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubGroup__id_par__2739D489">
+          <End Role="Parts" Type="Self.Parts" Multiplicity="0..1" />
+          <End Role="SubGroup" Type="Self.SubGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubGroup">
+              <PropertyRef Name="id_parts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database_test_scrapy_ABPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Group" EntityType="Self.Group" />
+          <EntitySet Name="Model" EntityType="Self.Model" />
+          <EntitySet Name="Parts" EntityType="Self.Parts" />
+          <EntitySet Name="SubGroup" EntityType="Self.SubGroup" />
+          <EntitySet Name="BasePool" EntityType="Self.BasePool" />
+          <AssociationSet Name="FK__BasePool__group__1BC821DD" Association="Self.FK__BasePool__group__1BC821DD">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="BasePool" EntitySet="BasePool" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Group__id_subgro__19DFD96B" Association="Self.FK__Group__id_subgro__19DFD96B">
+            <End Role="SubGroup" EntitySet="SubGroup" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BasePool__code__02FC7413" Association="Self.FK__BasePool__code__02FC7413">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="BasePool" EntitySet="BasePool" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubGroup__id_par__2739D489" Association="Self.FK__SubGroup__id_par__2739D489">
+            <End Role="Parts" EntitySet="Parts" />
+            <End Role="SubGroup" EntitySet="SubGroup" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database_test_scrapy_ABPModelStoreContainer" CdmEntityContainer="Database_test_scrapy_ABPEntities">
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="Database_test_scrapy_ABPModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id_subgroup" ColumnName="id_subgroup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Model">
+            <EntityTypeMapping TypeName="Database_test_scrapy_ABPModel.Model">
+              <MappingFragment StoreEntitySet="Model">
+                <ScalarProperty Name="IDModel" ColumnName="IDModel" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="complectation" ColumnName="complectation" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parts">
+            <EntityTypeMapping TypeName="Database_test_scrapy_ABPModel.Parts">
+              <MappingFragment StoreEntitySet="Parts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="tree_code" ColumnName="tree_code" />
+                <ScalarProperty Name="tree" ColumnName="tree" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubGroup">
+            <EntityTypeMapping TypeName="Database_test_scrapy_ABPModel.SubGroup">
+              <MappingFragment StoreEntitySet="SubGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id_parts" ColumnName="id_parts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BasePool">
+            <EntityTypeMapping TypeName="Database_test_scrapy_ABPModel.BasePool">
+              <MappingFragment StoreEntitySet="BasePool">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="complectation" ColumnName="complectation" />
+                <ScalarProperty Name="baseJSON" ColumnName="baseJSON" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="group" ColumnName="group" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
